@@ -1,0 +1,108 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+version = '1.0'
+sourceCompatibility = 1.8
+
+allprojects {
+    apply plugin: 'idea'
+    group = 'me.negotiatewith.app API'
+    description = 'Negotiate With Me API'
+}
+
+allprojects {
+    apply plugin: 'java'
+
+
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+    }
+
+    dependencies {
+        repositories {
+            mavenCentral()
+        }
+
+        compile 'joda-time:joda-time:2.3',
+                'org.jadira.usertype:usertype.jodatime:2.0.1',
+                'com.google.guava:guava:15.0',
+                'mysql:mysql-connector-java:5.1.28',
+                'org.hibernate:hibernate-entitymanager:4.3.5.Final',
+                'org.hibernate:hibernate-envers:4.3.5.Final',
+                'org.hibernate:hibernate-core:4.3.5.Final',
+                'org.modelmapper:modelmapper:0.6.3',
+                'io.federecio:dropwizard-swagger:0.5.2',
+                'net.sf.dozer:dozer:5.5.1',
+                'com.googlecode.genericdao:dao-hibernate:1.2.0',
+                'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final',
+                'com.fasterxml.jackson.core:jackson-databind:2.4.2',
+                'org.projectlombok:lombok:1.16.4',
+                'com.github.oxo42:stateless4j:2.5.0',
+                'com.ganyo:gcm-server:1.0.2',
+                'com.google.code.gson:gson:2.3.1',
+                'org.antlr:stringtemplate:3.2'
+
+        compile 'io.dropwizard:dropwizard-core:0.7.1',
+                'io.dropwizard:dropwizard-migrations:0.7.1'
+
+        compile('com.hubspot.dropwizard:dropwizard-guice:' + '0.7.0.2') {
+            exclude group: 'com.google.inject', module: 'guice_servlet'
+        }
+
+        compile 'com.google.inject.extensions:guice-multibindings:3.0',
+                'com.google.inject.extensions:guice-persist:3.0'
+
+        compile 'com.palominolabs.metrics:metrics-guice:3.1.2'
+
+        compile 'com.netflix.hystrix:hystrix-yammer-metrics-publisher:1.3.8'
+
+        compile 'com.netflix.hystrix:hystrix-metrics-event-stream:1.3.8'
+
+
+        compile 'org.slf4j:slf4j-api:1.7.5',
+                'org.slf4j:log4j-over-slf4j:1.7.5',
+                'org.slf4j:jul-to-slf4j:1.7.5'
+
+        compile 'com.sun.jersey:jersey-client:1.18.1'
+
+        compile 'net.sf.opencsv:opencsv:2.3'
+        compile 'org.jvnet.mimepull:mimepull:1.9.4'
+
+        testCompile 'org.hsqldb:hsqldb:2.3.1'
+        testCompile "junit:junit:4.11"
+        testCompile 'org.jukito:jukito:1.3'
+        testCompile 'io.dropwizard:dropwizard-testing:0.7.1'
+    }
+}
+
+task createWrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
+
+ext.mainClassName = 'me.negotiatewith.app.MainApplication'
+ext.configFile = '/Users/ishan/Development/code/java/negotiate-with-me/src/main/resources/development.yaml'
+
+buildscript {
+    apply from: file('gradle/buildscript.gradle'), to: buildscript
+}
+
+apply from: file("gradle/common.gradle")
+
+allprojects {
+    configurations {
+        all*.exclude group: 'log4j', module: 'log4j'
+        all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        all*.exclude group: 'org.slf4j', module: 'slf4j-jdk14'
+        all*.exclude group: 'org.slf4j', module: 'slf4j-simple'
+        all*.exclude group: 'org.testng', module: 'testng'
+    }
+
+    sourceSets.main.output.resourcesDir = sourceSets.main.output.classesDir
+}
+
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 10, 'minutes'
+}
