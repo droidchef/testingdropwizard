@@ -37,7 +37,7 @@ public class UserResourceV1 {
         User user = userService.findByEmailPassword(email, password);
 
         if (user == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("user not found").build();
+            return Response.status(Response.Status.NOT_FOUND).entity("user not found").build();
         } else {
             return Response.status(Response.Status.OK).entity(new UserDto(user)).build();
         }
