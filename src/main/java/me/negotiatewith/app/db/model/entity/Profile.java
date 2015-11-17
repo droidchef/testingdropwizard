@@ -6,10 +6,9 @@ import me.negotiatewith.app.core.utils.JodaDateTimeConverter;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.sql.Date;
 
-/**
- * Created by ishan on 16/11/15.
- */
+
 @Data
 @EqualsAndHashCode(callSuper=true)
 @Entity
@@ -25,8 +24,13 @@ public class Profile extends BaseEntity {
     private Boolean isHunter;
 
     @Column(name = "date_of_birth")
-    @Convert(converter = JodaDateTimeConverter.class)
-    private DateTime dateOfBirth;
+    private Date dateOfBirth;
 
+    @OneToOne(mappedBy = "profile")
+    private User user;
+
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "resume_id", referencedColumnName = "id")
+    private Resume resume;
 }
 

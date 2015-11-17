@@ -18,9 +18,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by ishan on 13/11/15.
- */
+
 public class BaseDaoJpaImpl<T, ID extends Serializable> implements BaseDao<T, ID> {
 
     private final Provider<EntityManager> emf;

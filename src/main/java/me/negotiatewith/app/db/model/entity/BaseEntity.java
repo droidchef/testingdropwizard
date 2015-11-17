@@ -9,9 +9,7 @@ import org.joda.time.DateTime;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by ishan on 13/11/15.
- */
+
 @Data
 @MappedSuperclass
 @EntityListeners(BaseEntityListener.class)

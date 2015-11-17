@@ -34,9 +34,9 @@ public class AppModule extends AbstractModule {
 
     private Properties createProperties() {
         Properties properties = new Properties();
-//        properties.put("hibernate.hbm2ddl.auto", "update");
-//        properties.put("hibernate.show_sql", "true");
-//        properties.put("hibernate.format_sql", "true");
+        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
         properties.put("hibernate.connection.url", "jdbc:mysql://localhost/db_negotiate_with_me?autoReconnect=true");
         properties.put("hibernate.connection.username", "root");

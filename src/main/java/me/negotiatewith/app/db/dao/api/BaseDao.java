@@ -5,9 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by ishan on 13/11/15.
- */
+
 public interface BaseDao<T, ID extends Serializable> {
 
     T saveEntity(T entity);

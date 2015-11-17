@@ -11,9 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import javax.inject.Provider;
 import javax.persistence.EntityManager;
 
-/**
- * Created by ishan on 13/11/15.
- */
+
 public class UserDaoImpl extends BaseDaoJpaImpl<User, Long> implements UserDao{
 
     @Inject
@@ -41,4 +39,9 @@ public class UserDaoImpl extends BaseDaoJpaImpl<User, Long> implements UserDao{
         return (User) criteria.uniqueResult();
     }
 
+    @Override
+    @Transactional
+    public User saveEntity(User entity) {
+        return super.saveEntity(entity);
+    }
 }

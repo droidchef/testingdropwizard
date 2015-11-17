@@ -2,19 +2,17 @@ package me.negotiatewith.app.resources;
 
 import com.google.inject.Inject;
 import me.negotiatewith.app.core.dto.model.ProfileDto;
-import me.negotiatewith.app.core.service.api.ProfileService;
-import me.negotiatewith.app.db.model.entity.Profile;
-import me.negotiatewith.app.db.model.entity.User;
 import me.negotiatewith.app.core.dto.model.UserDto;
+import me.negotiatewith.app.core.service.api.ProfileService;
 import me.negotiatewith.app.core.service.api.UserService;
+import me.negotiatewith.app.db.model.entity.User;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- * Created by ishan on 13/11/15.
- */
+
 @Path("/v1/users")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResourceV1 {
@@ -39,8 +37,14 @@ public class UserResourceV1 {
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("user not found").build();
         } else {
-            return Response.status(Response.Status.OK).entity(new UserDto(user)).build();
+            return Response.status(Response.Status.OK).entity(new UserDto(user, false)).build();
         }
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createUser(@Valid UserDto userDto) {
+        return Response.status(Response.Status.OK).entity(userService.saveEntity(userDto)).build();
     }
 
     @GET
@@ -55,9 +59,15 @@ public class UserResourceV1 {
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("profile not found").build();
         } else {
-            UserDto userDto = new UserDto(user);
-            userDto.setProfile(user.getProfile());
+            UserDto userDto = new UserDto(user, true);
             return Response.status(Response.Status.OK).entity(userDto).build();
         }
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{user_id}/profile")
+    public Response createProfile(@Valid ProfileDto profileDto, @PathParam("user_id") Long id) {
+        return Response.status(Response.Status.OK).entity(profileService.saveEntity(profileDto, id)).build();
     }
 }

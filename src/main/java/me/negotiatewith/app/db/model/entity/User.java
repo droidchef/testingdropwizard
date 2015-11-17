@@ -5,9 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
-/**
- * Created by ishan on 13/11/15.
- */
+
 @Data
 @EqualsAndHashCode(callSuper=true)
 @Entity

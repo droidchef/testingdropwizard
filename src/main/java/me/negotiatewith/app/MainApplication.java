@@ -11,9 +11,7 @@ import io.dropwizard.setup.Environment;
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
 
-/**
- * Created by ishan on 13/11/15.
- */
+
 public class MainApplication extends Application<AppConfiguration> {
 
     private GuiceBundle<AppConfiguration> guiceBundle;

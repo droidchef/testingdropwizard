@@ -1,13 +1,13 @@
 package me.negotiatewith.app.core.service.impl;
 
 import com.google.inject.Inject;
+import me.negotiatewith.app.core.dto.model.UserDto;
 import me.negotiatewith.app.db.model.entity.User;
 import me.negotiatewith.app.core.service.api.UserService;
 import me.negotiatewith.app.db.dao.api.UserDao;
+import org.joda.time.DateTime;
 
-/**
- * Created by ishan on 13/11/15.
- */
+
 public class UserServiceImpl implements UserService{
 
     private final UserDao userDao;
@@ -17,7 +17,15 @@ public class UserServiceImpl implements UserService{
         this.userDao = userDao;
     }
 
-    @Override public User saveEntity(User user) {
+    @Override public User saveEntity(UserDto userDto) {
+
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        user.setName(userDto.getName());
+        user.setCreatedAt(new DateTime(System.currentTimeMillis()));
+        user.setUpdatedAt(new DateTime(System.currentTimeMillis()));
+
         return userDao.saveEntity(user);
     }
 

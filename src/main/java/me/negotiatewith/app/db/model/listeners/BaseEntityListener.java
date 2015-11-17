@@ -6,9 +6,7 @@ import org.joda.time.DateTime;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-/**
- * Created by ishan on 13/11/15.
- */
+
 public class BaseEntityListener {
 
     @PreUpdate

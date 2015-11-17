@@ -11,9 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import javax.inject.Provider;
 import javax.persistence.EntityManager;
 
-/**
- * Created by ishan on 16/11/15.
- */
+
 public class ProfileDaoImpl extends BaseDaoJpaImpl<Profile, Long> implements ProfileDao {
 
     @Inject

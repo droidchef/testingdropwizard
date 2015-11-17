@@ -17,10 +17,8 @@ Project Name: NegotiateWith.me
 
 * Resume
 	1. id
-	2. user_id
-	3. resume_id
-	4. current_ctc
-	5. total_experience (in months)
+	2. profile_id
+	3. current_ctc
 
 * Education
 	1. id
@@ -34,7 +32,7 @@ Project Name: NegotiateWith.me
 
 * Experience
 	1. id
-	2. resume_id
+	2. profile_id
 	3. organisation_name
 	4. position
 	5. start_date
